@@ -1,1 +1,214 @@
-java
+public class Task01_February {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        out.print("Введите год: ");
+        int year = in.nextInt();
+        int febDays = 28;
+        boolean isLeapYear = year % 4 == 0
+                & (year % 100 != 0 | year % 400 == 0);
+        if (isLeapYear) {
+            febDays = 29;
+        }
+        out.println("В " + year + " году в феврале "
+                + febDays + " дней.");
+    }
+}
+
+import static java.lang.Math.*;
+import static java.lang.System.out;
+import java.util.Scanner;
+
+public class Task02_Queens {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int row1 = 3, col1 = 4; //ферзь1
+        int row2 = 7, col2 = 6; //ферзь2
+        boolean horisontalOk = row1 != row2;
+        boolean verticalOk = col1 != col2;
+        boolean diagonalOk = abs(row1 - row2) != abs(col1 - col2);
+        if (horisontalOk & verticalOk & diagonalOk) {
+            out.println("Ферзи не бьют друг друга");
+        } else {
+            out.println("Ферзи бьют друг друга");
+        }
+    }
+}
+import static java.lang.Math.*;
+import static java.lang.System.out;
+import java.util.Scanner;
+
+/**
+ * Напишите программу решения квадратного уравнения, которая проверяет
+ * дискриминант, и если он меньше нуля, печатает «Корней нет», иначе печатает,
+ * чему равны корни.
+ * 
+ * Модифицировать решение квадратного уравнения на каскадный оператор, чтобы
+ * различить случаи для 0 корней, 1 корень и 2 корня.
+ */
+public class Task03_Quadratic {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+       int a = 1;
+       int b = 2;
+       int c = -3;
+       double x1 =0;
+       double x2 = 0;
+       
+       int disc = b * b - 4 * a * c;
+       if (disc < 0) out.println("Корней нет!");
+       else if(disc > 0){
+            x1 =  ((-b + sqrt(disc)) / 2*a);
+           x2 =  ((-b - sqrt(disc)) / 2*a);
+           out.println("x1 равен " + x1 + "x2 равен " + x2) ;
+       }
+    }
+}
+import static java.lang.System.out;
+import java.util.Scanner;
+
+public class Task04_Cascade {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        out.print("Сколько лет у вас опыт работы? ");
+        double experience = in.nextDouble();
+        if (experience < 1) {
+            out.println("Зарплата будет мальенькая");
+        } else if (experience < 2) {
+            out.println("Зарплата будет средняя");
+        } else if (experience < 3) {
+            out.println("Зарплата будет большая");
+        } else {
+            out.println("Зарплата будет очень большая");
+        }
+    }
+}
+
+import static java.lang.System.out;
+import java.util.Scanner;
+
+public class Task05_Euclid {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        out.println("Введите два целых числа:");
+        int m = in.nextInt(), n = in.nextInt();
+        //ищем наибольший общий делитель m и n
+        while (m != n) {
+            if (m > n) {
+                m = m - n;
+            } else {
+                n = n - m;
+            }
+        }
+        out.println("Наибольший общий делитель равен " + m);
+    }
+}
+import static java.lang.System.out;
+import java.util.Scanner;
+
+public class Task06_Squares {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int max = 100; //размер таблицы
+        for (int i = 1; i <= max; i++) {
+            out.print(i * i + " ");
+            if (i % 10 > 0) continue;
+            out.println();
+        }
+    }
+}
+import static java.lang.System.out;
+import java.util.Scanner;
+
+public class Task07_Factorial {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        out.print("Введите n: ");
+        int n = in.nextInt();
+        int factorial = 1;
+        for (int i = 2; i <= n; i++) {
+            factorial = factorial * i;
+        }
+        out.println("n! = " + factorial);
+    }
+}
+import static java.lang.Math.*;
+import static java.lang.System.out;
+import java.util.Scanner;
+
+/**
+ * Школьный учитель математики, чтобы занять детей на долгое время, предложил им
+ * сосчитать сумму чисел от 1 до 100. Юный Карл Гаусс заметил, что попарные
+ * суммы с противоположных концов одинаковы: 1+100=101, 2+99=101 и т. д., и
+ * мгновенно получил результат 101.50=5050. Написать программу, которая считает
+ * сумму чисел от 1 до заданного n в цикле и способом Гаусса, а потом сравнивает
+ * результаты.
+ */
+public class Task08_Gauss {
+
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int n = in.nextInt();
+        int sum = 0;
+        for (int i = 0; i <= n; i++) {
+            sum += i;
+        }
+        out.println(sum);
+
+        int gauss = 0;
+
+        if (n % 2 == 0) {
+            int para = n / 2;
+             gauss = (1 + n) * para;
+             out.println(gauss);
+        }
+        else{
+             int para = n / 2;
+            gauss = n * para;
+            out.println(gauss);
+        }
+        
+        if (sum == gauss) {
+            out.println("Они равны");
+        }
+        
+        
+    }
+}
+import static java.lang.Math.*;
+import static java.lang.System.out;
+import java.util.Scanner;
+
+/**
+ * Написать программу, которая вводит ваш возраст как целое число, после чего
+ * печатает «Вам 22 года» или «Вам 21 год» или «Вам 25 лет», правильно выбирая
+ * окончание «год», «года» и «лет» в зависимости от возраста.
+ */
+public class Task09_AgeForm {
+
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        out.println("Введите Ваш возраст: ");
+        int age = in.nextInt();
+        int balance = age % 10;
+        if (balance == 0) {
+            out.println("Вам " + age + " лет");
+        } else if (balance == 1) {
+            out.println("Вам " + age + " год");
+        } else if (balance < 5) {
+            out.println("Вам " + age + " года");
+        } else if (balance < 10) {
+            out.println("Вам " + age + " лет");
+        }
+
+    }
+}
+
