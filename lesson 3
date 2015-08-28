@@ -1,0 +1,520 @@
+import static java.lang.Math.*;
+import static java.lang.System.out;
+import java.util.Scanner;
+
+public class Task01_Quadratic {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        double a = 1, b = 2, c = -3;
+        double d = b * b - 4 * a * c;
+        double[] x = new double[2];
+        x[0] = (-b - sqrt(d)) / (2 * a);
+        x[1] = (-b + sqrt(d)) / (2 * a);
+        out.println("Корни квадратного уравнения: "
+                + x[0] + " и " + x[1]);
+    }
+}
+
+import static java.lang.System.out;
+import java.util.Scanner;
+
+public class Task02_Sum {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        double[] a = {3, 15, -1, 3, 7};
+        double sum = 0;
+        for (int i = 0; i < a.length; i++) {
+            sum = sum + a[i];
+        }
+        out.println("Сумма равна " + sum);
+    }
+}
+
+
+import static java.lang.System.out;
+import java.util.Scanner;
+
+public class Task03_Min {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        double[] a = {2, 3, 1, 4};
+        int min = 0;
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] < a[min]) {
+                min = i;
+            }
+        }
+        out.println("Индекс равен " + min);
+        out.println("Значение равно " + a[min]);
+    }
+}
+
+import static java.lang.Math.*;
+import static java.lang.System.out;
+import java.util.Scanner;
+
+/**
+ * Напечатать элементы массива в обратном порядке.
+ */
+public class Task04_Reverse {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        double[] a = {2, 3, 1, 4};
+        for(int i=a.length -1; i>=0; i--){
+            out.println(a[i]);
+        }
+    }
+}
+
+import static java.lang.Math.*;
+import static java.lang.System.out;
+import java.util.Scanner;
+
+public class Task05_Twins {
+
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int[] a = new int[10];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = (int) (random() * 30);
+        }
+        
+        boolean found = false;
+        m: for (int i = 0; i < a.length - 1; i++) {
+            for (int j = i + 1; j < a.length; j++) {
+                found = a[i] == a[j];
+                if (found) {
+                    out.println("Элементы a[" + i + "] и a[" + j
+                            + "] равны " + a[i]);
+                    break m;
+                }
+            }
+        }
+        if (!found) {
+            out.println("Все элементы разные");
+        }
+    }
+}
+
+import static java.lang.System.out;
+import java.time.Duration;
+import java.time.Instant;
+
+public class Task06_Prime {
+
+    public static void main(String[] args) {
+        int n = 1000;
+
+        //Решето Эратосфена
+        Instant start1 = Instant.now();
+        boolean[] num = new boolean[n];
+        for (int i = 2; i < n; i++) {
+            num[i] = true;
+        }
+        for (int i = 2; i * i <= n; i++) {
+            if (num[i]) { //число простое
+                for (int j = i * i; j < n; j = j + i) {
+                    num[j] = false; //вычёркиваем
+                }
+            }
+        }
+        Instant finish1 = Instant.now();
+
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if (num[i]) {
+                count++;
+                if (count % 10 == 0) out.println();
+                out.print(i + " ");
+            }
+        }
+        out.println();
+        out.println("Решето Эратосфена: "
+                + Duration.between(start1, finish1).toMillis() / 1000.0);
+        
+        out.println();
+        
+//        //Линейный алгоритм
+//        Instant start2 = Instant.now();
+//        count = 0;
+//        for (int i = 2; i <= n; i++) {
+//            boolean isPrime = true;
+//            for (int j = 2; isPrime & j * j <= i; j++) {
+//                isPrime = i % j > 0; // n не делится на i
+//            }
+//            if (isPrime) {
+//                count++;
+//                if (count % 10 == 0) out.println();
+//                out.print(i + " ");
+//            }
+//        }
+//        out.println();
+//        Instant finish2 = Instant.now();
+//        out.println("Линейный алгоритм: "
+//                + Duration.between(start2, finish2).toMillis() / 1000.0);
+    }
+
+}
+import static java.lang.Math.*;
+import static java.lang.System.out;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+/**
+ * Известен рост всех учеников школы. Можно ли из них сформировать баскетбольную
+ * команду? В команде должно быть не менее пяти человек ростом больше 170 см?
+ */
+public class Task07_Basketball {
+    static Scanner in = new Scanner(System.in);
+    static Random random = new Random();
+
+    public static void main(String[] args) {
+        int[] height = new int[20 + random.nextInt(10)];
+        for (int i = 0; i < height.length; i++) {
+            height[i] = 150 + random.nextInt(30);
+        }
+        out.println(Arrays.toString(height));
+        int count=0;
+        for(int i=0; i<height.length; i++){
+                if(height[i] > 170) count++;
+        }
+        if(count > 5) out.println("Можно сформировать команду");
+        else out.println("Нельзя сформировать команду");
+    }
+}
+
+import static java.lang.System.out;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Task08_Linesearch {
+    static Scanner in = new Scanner(System.in);
+    static Random random = new Random();
+
+    public static void main(String[] args) {
+        int[] a = new int[20]; //хаотичный массив
+        for (int i = 0; i < a.length; i++) a[i] = random.nextInt(20);
+        int x = 10; //элемент, который надо найти
+        int index = -1; //не найден
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] == x) {
+                index = i;
+                break;
+            }
+        }
+        out.println(Arrays.toString(a));
+        if (index >= 0) {
+            out.println("a[" + index + "] = " + x);
+        } else {
+            out.println(x + " не найдено");
+        }
+    }
+}
+import static java.lang.System.out;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Random;
+import static java.util.Arrays.sort;
+
+public class Task09_Binarysearch {
+    static Scanner in = new Scanner(System.in);
+    static Random random = new Random();
+
+    public static void main(String[] args) {
+        int[] a = new int[20];
+        for (int i = 0; i < a.length; i++) a[i] = random.nextInt(20);
+        sort(a); //упорядоченный массив
+        int x = 10; //элемент, который надо найти
+        int low = 0, high = a.length - 1;
+        int index = -1; //не найден
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (a[mid] < x) {
+                low = mid + 1;
+            } else if (a[mid] > x) {
+                high = mid - 1;
+            } else {
+                index = mid;
+                break;
+            }
+        }
+        out.println(Arrays.toString(a));
+        if (index >= 0) {
+            out.println("a[" + index + "] = " + x);
+        } else {
+            out.println(x + " не найдено");
+        }
+    }
+}
+
+
+import static java.lang.System.out;
+import java.time.Duration;
+import java.time.Instant;
+import static java.util.Arrays.parallelSort;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Task10_CompareSearch {
+    static Scanner in = new Scanner(System.in);
+    static Random random = new Random();
+
+    public static void main(String[] args) {
+        int n = 50_000_000;
+
+        int[] a = new int[n];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = random.nextInt(n); //заполняем случайными числами
+        }
+        int x = random.nextInt(n); //число, которое будем искать
+
+        //Линейный поиск
+        Instant start1 = Instant.now();
+        int index = -1; //not found
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] == x) {
+                index = i;
+                break;
+            }
+        }
+        Instant finish1 = Instant.now();
+        out.println("Линейный поиск: "
+                + Duration.between(start1, finish1).toMillis() / 1000.0);
+
+        out.println("Соритровка...");
+        parallelSort(a);
+
+        //Двоичный поиск
+        Instant start2 = Instant.now();
+        int low = 0, high = a.length - 1;
+        index = -1; //not found
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (a[mid] < x) {
+                low = mid + 1;
+            } else if (a[mid] > x) {
+                high = mid - 1;
+            } else {
+                index = mid;
+                break;
+            }
+        }
+        Instant finish2 = Instant.now();
+        out.println("Двоичный поиск: "
+                + Duration.between(start2, finish2).toMillis() / 1000.0);
+    }
+}
+
+import static java.lang.System.out;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Task11_LineSort {
+    static Scanner in = new Scanner(System.in);
+    static Random random = new Random();
+
+    public static void main(String[] args) {
+        int[] a = new int[20]; //хаотичный массив
+        for (int i = 0; i < a.length; i++) a[i] = random.nextInt(20);
+
+        //печать массива
+        out.println(Arrays.toString(a));
+        
+        //сортировка выбором
+        for (int i = 0; i < a.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < a.length; j++) {
+                if (a[j] < a[min]) {
+                    min = j;
+                }
+            }
+            int buf = a[i];
+            a[i] = a[min];
+            a[min] = buf;
+        }
+        
+        //печать массива
+        out.println(Arrays.toString(a));
+    }
+}
+import static java.lang.System.out;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Task12_BubbleSort {
+    static Scanner in = new Scanner(System.in);
+    static Random random = new Random();
+
+    public static void main(String[] args) {
+        int[] a = new int[20]; //хаотичный массив
+        for (int i = 0; i < a.length; i++) a[i] = random.nextInt(20);
+
+        //печать массива
+        out.println(Arrays.toString(a));
+        
+        //сортировка пузырьком
+        for (int i = a.length - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (a[j] > a[j + 1]) {
+                    int buf = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = buf;
+                }
+            }
+        }
+        
+        //печать массива
+        out.println(Arrays.toString(a));
+    }
+}
+
+import static java.lang.System.out;
+import java.util.Scanner;
+
+public class Task13_CharAt {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        String s = "Ночь. Улица. Фонарь. Аптека.";
+        int pointCount = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '.') {
+                pointCount++;
+            }
+        }
+        out.println("Количество точек " + pointCount);
+    }
+}
+
+import static java.lang.System.out;
+import java.util.Scanner;
+
+public class Task14_Concat {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        String s1 = "Ночь. Улица. Фонарь. Аптека.";
+        String s2 = "";
+        for (int i = 0; i < s1.length(); i++) {
+            if (s1.charAt(i) == '.') {
+                s2 = s2 + "!";
+            } else {
+                s2 = s2 + s1.charAt(i);
+            }
+        }
+        out.println(s2);
+    }
+}
+import static java.lang.System.out;
+import java.util.Scanner;
+
+public class Task15_Words {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        String[] words = {"Ночь", "Улица", "Фонарь", "Аптека"};
+        String block = "";
+        for (int i = 0; i < words.length; i++) {
+            if (block.length() > 0) {
+                block = block + " ";
+            }
+            block = block + words[i] + ".";
+        }
+        out.println(block);
+    }
+}
+import static java.lang.Math.*;
+import static java.lang.System.out;
+import java.util.Scanner;
+
+/**
+ * Задан словарь в виде массива слов. Напечатать все слова из него, длина
+ * которых равна 5 буквам.
+ */
+public class Task16_Words5 {
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        String[] words = new String[]{
+            "Ночь", "Недуг", "Улица", "Фонарь", "Фугас", "Аптека"
+        };
+        for(int i=0; i<words.length; i++){
+            if(words[i].length()==5) {
+            out.println(words[i]);
+            }
+        }
+    }
+}
+import static java.lang.Math.*;
+import static java.lang.System.out;
+import java.util.Arrays;
+import java.util.Scanner;
+
+/**
+ * Палиндромом («перевёртышем») называется симметричная последовательность
+ * элементов, то есть одинаково читающаяся с начала и с конца, например: 1 5 3 3
+ * 5 1 ротатор Написать программу, проверяющую, является ли палиндромом: -
+ * заданный массив - заданное слово
+ */
+public class Task17_Palindrom {
+
+    static Scanner in = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int[] a = {1, 5, 4, 5, 1};
+        int[] palindrom = new int[a.length];
+        //сортировка массива в обратном порядке
+        for (int i = 0; i < a.length; i++) {
+            palindrom[i] = a[a.length - 1 - i];
+        }
+        //сравниваем два массива
+        if (Arrays.equals(a, palindrom)) {
+            out.println("Ваш массив палиндром");
+        } else {
+            out.println("Массив палиндромом не является");
+        }
+
+        out.print("Введите слово: ");
+        String s = in.nextLine();
+        //преобразуем строку в массив чаров
+        char[] array = s.toCharArray();
+        char[] palin = new char[array.length];
+        //сортируем в обратном порядке и инициализируем новый массив
+        for (int i = 0; i < array.length; i++) {
+            palin[i] = array[array.length - 1 - i];
+        }
+        //сравниваем два массива
+        if (Arrays.equals(array, palin)) {
+            out.println("Ваше слово палиндром");
+        } else {
+            out.println("Слово палиндромом не является");
+        }
+        out.print("Введите фразу: ");
+        String phrase = in.nextLine();
+        String nowhite = phrase.replaceAll(" ", "").toUpperCase();
+        char[] arrayS = nowhite.toCharArray();
+        char[] palin1 = new char[arrayS.length];
+        //сортируем в обратном порядке и инициализируем новый массив
+        for (int i = 0; i < arrayS.length; i++) {
+            palin1[i] = arrayS[arrayS.length - 1 - i];
+        }
+        //сравниваем два массива
+        if (Arrays.equals(arrayS, palin1)) {
+            out.println("Ваша фраза палиндром");
+        } else {
+            out.println("Фраза палиндромом не является");
+        }
+
+    }
+}
+
+
